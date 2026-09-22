@@ -1,183 +1,159 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Health Care System</title>
-
-<link rel="stylesheet" href="front_page.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HealthCare AI — Smart Hospital Appointments</title>
+<meta name="description" content="Book appointments, manage records, and get AI-assisted triage in one clean system." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/app.css" />
 </head>
 <body>
 
-<!-- 🔵 TOP BAR -->
-<div class="top-bar">
-    <div>📞 9911211887 | 📧 anjalishavani@gmail.com</div>
-    <div>🕒 24/7 Service Available</div>
+<div class="topbar">
+  <div class="container">
+    <span>24/7 emergency support</span>
+    <span>Secure records &middot; Verified doctors</span>
+  </div>
 </div>
 
-<!-- 🔷 HEADER -->
-<header>
-    <div class="logo">
-        <h1>HealthCare AI</h1>
-        <span>Smart Health • Smart Life</span>
-    </div>
-
-    <nav>
-        <a href="#">Home</a>
-        <a href="#services">Services</a>
-        <a href="#ai">AI Diagnosis</a>
-        <a href="index.html"><button class="btn">Login</button></a>
-        <a href="signup.html"><button class="btn">Sign Up</button></a>
-    
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="home.html">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9C.9 8.9 2.4 5.5 5.7 5.5c2 0 3.4 1.1 4.3 2.6h4c.9-1.5 2.3-2.6 4.3-2.6 3.3 0 4.8 3.4 3.2 6.5C19 16.5 12 21 12 21Z" opacity="0"/><path d="M12 5v14M5 12h14"/></svg>
+      </span>
+      <span><strong>HealthCare AI</strong><small>Smart health, simplified</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#hospitals">Hospitals</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="index.html">Log in</a>
+      <a class="btn btn-primary" href="signup.html">Sign up</a>
+    </div>
+  </div>
 </header>
 
-<!-- 🧠 AI RECOMMENDATION SECTION -->
-<section class="ai-section">
-    <h2>🤖 AI Health Recommendation</h2>
-    <p>Enter symptoms and get instant health advice</p>
-
-    <div class="ai-box">
-        <input type="text" placeholder="Enter symptoms (e.g. fever, headache)">
-        <button>Check Now</button>
-    </div>
-</section>
-
-<!-- 🎥 HERO VIDEO SECTION -->
-<!-- <section class="hero">
-    <video autoplay muted loop>
-        <source src="C:\Users\PC\Desktop\ai based doctor paitent appointment system\frontend\assets\images\wtv2.mp4" type="video/mp4">
-    </video>
-
-    <div class="hero-content">
-        <h2>Smart AI-Based Health System</h2>
-        <p>
-            Predict diseases early, save time, and connect with best doctors instantly.
-        </p>
-        <button>Get Started</button>
-        <button class="secondary">Book Appointment</button>
-    </div>
-</section> -->
 <section class="hero">
-    <video autoplay muted loop>
-        <source src="assets/images/wtv2.mp4" type="video/mp4">
-    </video>
-
-    <div class="hero-content">
-        <h2>Smart AI-Based Health System</h2>
-        <p>
-            Predict diseases early, save time, and connect with best doctors instantly.
-        </p>
-        <button>Get Started</button>
-        <button class="secondary">Book Appointment</button>
+  <div class="container">
+    <div>
+      <span class="eyebrow">AI-assisted appointment system</span>
+      <h1>Book the right doctor, faster.</h1>
+      <p class="lead">Search verified doctors, book appointments in seconds, and keep prescriptions, reports, and chats in one secure place.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="signup.html">Get started</a>
+        <a class="btn btn-ghost btn-lg" href="index.html">Book appointment</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>500+</strong><span>Verified doctors</span></div>
+        <div><strong>1,000+</strong><span>Patients onboard</span></div>
+        <div><strong>24/7</strong><span>Support</span></div>
+      </div>
     </div>
+    <div class="hero-card" aria-label="Product preview">
+      <div class="hero-card-header"><span class="status-dot"></span> Live availability</div>
+      <div class="hero-card-body">
+        <div class="mini-row">
+          <span class="mini-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+          <div><strong>Same-day slots</strong><span>General, cardio, ortho &amp; more</span></div>
+        </div>
+        <div class="mini-row">
+          <span class="mini-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span>
+          <div><strong>Secure records</strong><span>Reports &amp; prescriptions in one place</span></div>
+        </div>
+        <div class="mini-row">
+          <span class="mini-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M21 4v5h-5"/></svg></span>
+          <div><strong>AI triage</strong><span>Describe symptoms, get guidance</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- 💡 FEATURES -->
-<section class="features">
-    <h2>Our Key Features</h2>
-
-    <div class="feature-container">
-
-        <div class="feature-box">
-            <h3>AI Disease Prediction</h3>
-            <p>Smart AI detects health risks early.</p>
-        </div>
-
-        <div class="feature-box">
-            <h3>Emergency Support</h3>
-            <p>24/7 emergency medical help available.</p>
-        </div>
-
-        <div class="feature-box">
-            <h3>Online Appointments</h3>
-            <p>Book doctors instantly without waiting.</p>
-        </div>
-
-        <div class="feature-box">
-            <h3>Top Doctors</h3>
-            <p>Choose verified and experienced doctors.</p>
-        </div>
-
-        <div class="feature-box">
-            <h3>Health Records</h3>
-            <p>Maintain digital medical history.</p>
-        </div>
-
-        <div class="feature-box">
-            <h3>Insurance Support</h3>
-            <p>Easy insurance and claim processing.</p>
-        </div>
-
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <h2>Everything for a smooth visit</h2>
+      <p>Designed for patients and doctors — minimal steps, clear information, no clutter.</p>
     </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon teal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+        <h3>Instant appointments</h3><p>Pick a doctor, choose a slot, done. Automatic confirmations and reminders.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg></div>
+        <h3>Digital health records</h3><p>Reports, prescriptions, and history — organized and accessible anytime.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a8 8 0 1 1-3.2-6.4"/><path d="M21 4v5h-5"/></svg></div>
+        <h3>AI symptom check</h3><p>Get early guidance from symptom input before you book the right specialist.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon teal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>24/7 emergency help</h3><p>One-tap emergency trigger with live location sharing for faster care.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Doctor messaging</h3><p>Follow up directly with your doctor — no missed calls, no confusion.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg></div>
+        <h3>Payments &amp; billing</h3><p>Transparent billing with a clean payment history for every visit.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- 📊 STATS SECTION -->
-<section class="stats">
-    <div class="stat-box">
-        <h2>500+</h2>
-        <p>Doctors</p>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="stats-band">
+      <div><strong>500+</strong><span>Doctors</span></div>
+      <div><strong>1,000+</strong><span>Patients</span></div>
+      <div><strong>50+</strong><span>Hospitals</span></div>
+      <div><strong>24/7</strong><span>Support</span></div>
     </div>
-
-    <div class="stat-box">
-        <h2>1000+</h2>
-        <p>Patients</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>50+</h2>
-        <p>Hospitals</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>24/7</h2>
-        <p>Support</p>
-    </div>
+  </div>
 </section>
 
-<!-- 🏥 HOSPITAL SECTION -->
-<section class="hospitals">
-    <h2>Top Hospitals</h2>
-
-    <div class="hospital-container">
-
-        <div class="hospital-card">
-            <h3>City Care Hospital</h3>
-            <p>Delhi • Multi-Speciality</p>
-        </div>
-
-        <div class="hospital-card">
-            <h3>LifeLine Hospital</h3>
-            <p>Mumbai • Emergency Care</p>
-        </div>
-
-        <div class="hospital-card">
-            <h3>Apollo Clinic</h3>
-            <p>Bangalore • Advanced Treatment</p>
-        </div>
-
+<section class="section" id="hospitals" style="padding-top:0">
+  <div class="container split">
+    <div>
+      <div class="section-head" style="margin-bottom:0">
+        <h2>Top hospitals</h2>
+        <p>Verified multi-speciality partners across major cities.</p>
+      </div>
+      <div class="list">
+        <div class="list-item"><span class="mini-icon teal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M12 9v6M9 12h6"/></svg></span><div><strong>City Care Hospital</strong><span>Delhi &middot; Multi-speciality</span></div></div>
+        <div class="list-item"><span class="mini-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M12 9v6M9 12h6"/></svg></span><div><strong>LifeLine Hospital</strong><span>Mumbai &middot; Emergency care</span></div></div>
+        <div class="list-item"><span class="mini-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M12 9v6M9 12h6"/></svg></span><div><strong>Apollo Clinic</strong><span>Bengaluru &middot; Advanced treatment</span></div></div>
+      </div>
     </div>
+    <div class="form-card" id="contact">
+      <div class="section-head" style="margin-bottom:14px">
+        <h2 style="font-size:20px">Contact us</h2>
+        <p>We reply within one business day.</p>
+      </div>
+      <form onsubmit="event.preventDefault(); this.reset(); alert('Message sent. We will reach out shortly.');">
+        <label class="field"><span>Name</span><input type="text" placeholder="Your name" required /></label>
+        <label class="field"><span>Email</span><input type="email" placeholder="you@example.com" required /></label>
+        <label class="field"><span>Message</span><textarea placeholder="How can we help?"></textarea></label>
+        <button class="btn btn-primary btn-block" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
 </section>
 
-<!-- 📩 CONTACT -->
-<section class="contact">
-    <h2>Contact Us</h2>
-
-    <form>
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Email">
-        <textarea placeholder="Message"></textarea>
-        <button>Send Message</button>
-    </form>
-</section>
-
-<!-- 🔻 FOOTER -->
-<footer>
-    <p>© 2026 HealthCare AI | All Rights Reserved</p>
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 HealthCare AI. All rights reserved.</span>
+    <span>Built for reliable, human-centered care.</span>
+  </div>
 </footer>
 
 </body>

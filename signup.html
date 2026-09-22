@@ -1,142 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Doctor - Signup</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-}
-
-.container{
-    display:flex;
-    width:900px;
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,0.2);
-}
-
-.left{
-    flex:1;
-    background:linear-gradient(135deg,#4facfe,#00f2fe);
-    color:#fff;
-    padding:50px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.left h1{font-size:32px;margin-bottom:10px;}
-.left p{opacity:0.9;font-size:14px;}
-
-.right{
-    flex:1;
-    padding:40px;
-}
-
-.right h2{
-    text-align:center;
-    margin-bottom:20px;
-    color:#4facfe;
-}
-
-input, select{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:1px solid #ddd;
-    border-radius:10px;
-    outline:none;
-}
-
-input:focus, select:focus{
-    border-color:#4facfe;
-    box-shadow:0 0 5px rgba(79,172,254,0.4);
-}
-
-.btn{
-    width:100%;
-    padding:12px;
-    margin-top:12px;
-    background:linear-gradient(135deg,#4facfe,#00f2fe);
-    border:none;
-    color:#fff;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.btn:disabled{
-    opacity:0.6;
-    cursor:not-allowed;
-}
-
-.footer{
-    text-align:center;
-    margin-top:10px;
-    font-size:13px;
-}
-
-.footer a{
-    color:#4facfe;
-    text-decoration:none;
-}
-
-.msg{
-    text-align:center;
-    margin-top:10px;
-    font-size:14px;
-}
-</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HealthCare AI — Create account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/app.css" />
 </head>
-
 <body>
 
-<div class="container">
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-side">
+      <a class="brand" href="home.html" style="text-decoration:none;color:#fff">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <span><strong>HealthCare AI</strong><small style="color:#cfe6e5">Smart health, simplified</small></span>
+      </a>
+      <h1>Create your account.</h1>
+      <p>One account for booking, records, prescriptions, and secure messaging.</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Patient and doctor workspaces</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Clean appointment history</li>
+        <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg> Free to get started</li>
+      </ul>
+    </div>
 
-<div class="left">
-    <h1>Welcome 👋</h1>
-    <p>Join AI Doctor System and experience smart healthcare, instant booking & AI diagnosis.</p>
-</div>
-
-<div class="right">
-
-<h2>Create Account</h2>
-
-<form id="signupForm">
-
-<select id="role" required>
-<option value="patient">Patient</option>
-<option value="doctor">Doctor</option>
-</select>
-
-<input type="text" id="name" placeholder="Full Name" required>
-<input type="email" id="email" placeholder="Email" required>
-<input type="password" id="password" placeholder="Password" required>
-<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-
-<button class="btn" id="btn">Signup</button>
-
-</form>
-
-<div class="msg" id="msg"></div>
-
-<div class="footer">
-Already have an account? <a href="index.html">Login</a>
-</div>
-
-</div>
+    <div class="auth-main">
+      <h2>Sign up</h2>
+      <p>Takes less than a minute.</p>
+      <form id="signupForm">
+        <label class="field"><span>Role</span>
+          <select id="role" required>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </label>
+        <label class="field"><span>Full name</span><input type="text" id="name" placeholder="Jane Cooper" required /></label>
+        <label class="field"><span>Email</span><input type="email" id="email" placeholder="you@example.com" required /></label>
+        <label class="field"><span>Password</span><input type="password" id="password" placeholder="Minimum 6 characters" required /></label>
+        <label class="field"><span>Confirm password</span><input type="password" id="confirmPassword" placeholder="Repeat password" required /></label>
+        <button class="btn btn-primary btn-block btn-lg" id="btn" type="submit">Create account</button>
+      </form>
+      <div class="form-msg" id="msg"></div>
+      <div class="form-note">Already have an account? <a href="index.html">Log in</a> &middot; <a href="home.html">Back to home</a></div>
+    </div>
+  </div>
 </div>
 
 <script src="assets/js/config.js"></script>
@@ -154,63 +66,49 @@ form.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // Validation
-    if(!name || !email || !password){
-        msg.innerHTML = "⚠️ All fields are required";
+    if (!name || !email || !password) {
+        msg.textContent = "All fields are required";
         msg.style.color = "red";
         return;
     }
-
-    if(password !== confirmPassword){
-        msg.innerHTML = "❌ Passwords do not match";
+    if (password !== confirmPassword) {
+        msg.textContent = "Passwords do not match";
         msg.style.color = "red";
         return;
     }
-
-    if(password.length < 6){
-        msg.innerHTML = "⚠️ Password must be at least 6 characters";
+    if (password.length < 6) {
+        msg.textContent = "Password must be at least 6 characters";
         msg.style.color = "red";
         return;
     }
 
     btn.disabled = true;
-    btn.innerText = "Creating...";
+    btn.textContent = "Creating...";
 
-    try{
+    try {
         const res = await fetch(`${API_BASE_URL}/auth/signup`, {
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify({role, name, email, password})
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ role, name, email, password })
         });
 
-        // 🔥 SAFE JSON PARSE (no crash)
         const data = await res.json().catch(() => ({}));
 
-        console.log("STATUS:", res.status);
-        console.log("DATA:", data);
-
-        if(res.ok && data.success){
-            msg.innerHTML = "✅ Account created successfully!";
+        if (res.ok && data.success) {
+            msg.textContent = "Account created successfully. Redirecting...";
             msg.style.color = "green";
-
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1500);
+            setTimeout(() => { window.location.href = "index.html"; }, 1200);
         } else {
-            msg.innerHTML = data.message || "Signup failed";
+            msg.textContent = data.message || "Signup failed";
             msg.style.color = "red";
         }
-
-    } catch(err){
-        console.log(err);
-        msg.innerHTML = "❌ Server not responding";
+    } catch (err) {
+        msg.textContent = "Server not responding";
         msg.style.color = "red";
     }
 
     btn.disabled = false;
-    btn.innerText = "Signup";
+    btn.textContent = "Create account";
 });
 </script>
 
