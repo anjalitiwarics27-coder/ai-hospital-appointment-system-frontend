@@ -51,7 +51,13 @@ body > .sidebar { position: sticky; top: 0; height: 100vh; }
 }
 .sidebar h2 { color: #fff; font-size: 17px; letter-spacing: -0.01em; }
 .sidebar p { font-size: 12px; color: #9db8b7; }
-.sidebar .logo, .sidebar .sidebar-top, .sidebar .doctor-profile:first-child {
+.sidebar .logo {
+  display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px;
+}
+.sidebar .sidebar-top {
+  display: flex; flex-direction: column; gap: 4px; width: 100%;
+}
+.sidebar .doctor-profile:first-child {
   display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px;
 }
 .logo-icon {
