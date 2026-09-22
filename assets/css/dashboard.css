@@ -252,6 +252,125 @@ textarea { min-height: 90px; resize: vertical; }
 .report-details ul { list-style: none; margin-top: 8px; font-size: 13px; color: var(--muted); }
 .report-details li { padding: 3px 0; }
 
+/* =====================================================
+   DOCTOR UNIFICATION OVERRIDES (v5)
+   One professional shell for every doctor page.
+   High-specificity selectors beat legacy per-page
+   <style> blocks, so all pages render identically.
+   ===================================================== */
+div.dashboard > aside.sidebar,
+div.dashboard > div.sidebar,
+.dashboard > .sidebar {
+  position: sticky; top: 0; left: auto;
+  height: 100vh; max-height: 100vh;
+  width: 260px; min-width: 260px; max-width: 260px;
+  flex-shrink: 0; align-self: flex-start;
+  overflow-y: auto; overflow-x: hidden;
+  z-index: 50; float: none; margin: 0; transform: none;
+  background: linear-gradient(180deg, #0b2233 0%, #0a3f3e 100%);
+  color: #dbe7e6;
+  display: flex; flex-direction: column;
+  padding: 20px 14px; gap: 6px; box-sizing: border-box;
+}
+div.dashboard > div.main,
+div.dashboard > main.main-content,
+.dashboard > .main,
+.dashboard > .main-content {
+  flex: 1 1 auto; min-width: 0; max-width: 100%;
+  margin-left: 0; margin-right: 0; width: auto;
+  padding: 24px; position: relative; z-index: 1;
+  box-sizing: border-box;
+}
+/* uniform font inside doctor shell */
+div.dashboard, div.dashboard * {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+/* logo + menu always full-width stacked */
+.dashboard > .sidebar .logo,
+.dashboard > .sidebar .sidebar-top {
+  width: 100%; min-width: 0;
+}
+.dashboard > .sidebar ul.menu,
+.dashboard > .sidebar div.menu {
+  width: 100%; min-width: 0;
+  display: flex; flex-direction: column; gap: 2px;
+  list-style: none; padding: 0; margin: 0;
+  background: transparent; transform: none;
+}
+/* both menu patterns: li-wrapped and plain anchors */
+.dashboard > .sidebar .menu > li,
+.dashboard > .sidebar .menu > a {
+  width: 100%; min-width: 0; max-width: 100%;
+  box-sizing: border-box; margin: 0 0 2px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 10px;
+  color: #c9d9d8; text-decoration: none;
+  font-size: 13.5px; font-weight: 550;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  background: transparent; transform: none;
+  cursor: pointer; float: none; position: static;
+}
+.dashboard > .sidebar .menu > li:hover,
+.dashboard > .sidebar .menu > a:hover {
+  background: rgba(255, 255, 255, 0.1); color: #fff; transform: none;
+}
+.dashboard > .sidebar .menu > li.active,
+.dashboard > .sidebar .menu > a.active,
+.dashboard > .sidebar .menu > li > a.active {
+  background: rgba(255, 255, 255, 0.16); color: #fff; transform: none;
+}
+.dashboard > .sidebar .menu li i,
+.dashboard > .sidebar .menu li svg,
+.dashboard > .sidebar .menu a i,
+.dashboard > .sidebar .menu a svg {
+  width: 18px; min-width: 18px; flex-shrink: 0;
+  text-align: center; opacity: 0.9;
+}
+.dashboard > .sidebar .menu li span,
+.dashboard > .sidebar .menu li > a,
+.dashboard > .sidebar .menu li span a {
+  color: inherit; text-decoration: none; display: block; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  padding: 0; margin: 0; background: transparent;
+}
+/* profile pinned at bottom */
+.dashboard > .sidebar .doctor-profile {
+  margin-top: auto; margin-left: 0; margin-right: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius); padding: 14px; text-align: center;
+  position: static; width: auto; height: auto;
+}
+.dashboard > .sidebar .doctor-profile h3 { color: #fff; font-size: 14px; margin: 0; }
+.dashboard > .sidebar .doctor-profile p { font-size: 12px; color: #9db8b7; margin: 0 0 4px; }
+.dashboard > .sidebar .doctor-profile img {
+  width: 52px; height: 52px; border-radius: 50%;
+  object-fit: cover; margin: 0 auto 8px; display: block;
+}
+/* legacy topbar/doctor-box headers blend with theme */
+.dashboard > .main .topbar,
+.dashboard > .main-content .topbar {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  padding: 18px 20px; display: flex; align-items: center;
+  justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.dashboard > .main .topbar h1,
+.dashboard > .main-content .topbar h1 {
+  font-size: 20px; letter-spacing: -0.02em; color: var(--ink); margin: 0;
+}
+.dashboard > .main .doctor-box,
+.dashboard > .main-content .doctor-box {
+  background: #f8fafc; border: 1px solid var(--line);
+  padding: 8px 14px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px; box-shadow: none;
+}
+.dashboard > .main .doctor-box h4,
+.dashboard > .main-content .doctor-box h4 { font-size: 13.5px; color: var(--ink); margin: 0; }
+.dashboard > .main .doctor-box p,
+.dashboard > .main-content .doctor-box p { font-size: 12px; color: var(--muted); margin: 0; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .stats-container, .stats { grid-template-columns: 1fr 1fr; }
@@ -260,6 +379,13 @@ textarea { min-height: 90px; resize: vertical; }
 @media (max-width: 900px) {
   .dashboard { flex-direction: column; align-items: stretch; }
   .sidebar { width: 100%; min-width: 0; max-width: none; padding: 12px; position: static; height: auto; max-height: none; align-self: stretch; }
+  div.dashboard > aside.sidebar,
+  div.dashboard > div.sidebar,
+  .dashboard > .sidebar { width: 100%; min-width: 0; max-width: none; position: static; height: auto; max-height: none; }
+  div.dashboard > div.main,
+  div.dashboard > main.main-content,
+  .dashboard > .main,
+  .dashboard > .main-content { margin-left: 0; width: auto; }
   .sidebar .logo { padding-bottom: 8px; }
   .sidebar .sidebar-top { padding-bottom: 4px; }
   .menu { flex-direction: row; overflow-x: auto; padding-bottom: 4px; }

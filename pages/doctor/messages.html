@@ -7,145 +7,22 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/dashboard.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" defer></script>
+<link rel="stylesheet" href="../../assets/css/dashboard.css?v=5">
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+/* Shell + sidebar come from the shared theme (assets/css/dashboard.css).
+   Page-specific styles only below. */
 
 body{
     background:#edf4ff;
-    display:flex;
-    overflow:hidden;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-    width:270px;
-    height:100vh;
-    overflow-y:auto;
-    background:linear-gradient(180deg,#0f172a,#1e293b);
-    color:white;
-    padding:25px;
-    position:fixed;
-    left:0;
-    top:0;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:40px;
-}
-
-.logo-icon{
-    width:60px;
-    height:60px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#2563eb,#38bdf8);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
-}
-
-.logo h2{
-    font-size:28px;
-}
-
-.logo p{
-    color:#cbd5e1;
-    font-size:13px;
-}
-
-.menu{
-    list-style:none;
-}
-
-.menu li{
-    margin-bottom:12px;
-    border-radius:15px;
-    transition:0.3s;
-}
-
-.menu li:hover{
-    background:rgba(255,255,255,0.1);
-    transform:translateX(5px);
-}
-
-.menu li a{
-    padding:15px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    color:white;
-    text-decoration:none;
-}
-
-.active{
-    background:linear-gradient(135deg,#2563eb,#38bdf8);
-}
-
-/* DOCTOR PROFILE */
-
-.doctor-profile{
-    margin-top:35px;
-    text-align:center;
-    background:rgba(255,255,255,0.08);
-    padding:20px;
-    border-radius:20px;
-}
-
-.doctor-profile img{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    border:4px solid rgba(255,255,255,0.2);
-    margin-bottom:12px;
-}
-
-.doctor-profile h3{
-    margin-bottom:5px;
-}
-
-.doctor-profile p{
-    color:#cbd5e1;
-    font-size:13px;
-    margin-bottom:18px;
-}
-
-.logout-btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:14px;
-    background:linear-gradient(135deg,#ef4444,#dc2626);
-    color:white;
-    cursor:pointer;
-    font-weight:600;
-    transition:0.3s;
-}
-
-.logout-btn:hover{
-    transform:translateY(-3px);
 }
 
 /* MAIN */
 
 .main{
-    margin-left:270px;
-    width:100%;
     padding:25px;
 }
 
@@ -445,26 +322,6 @@ body{
         overflow:auto;
     }
 
-    .sidebar{
-        width:90px;
-        padding:15px 10px;
-    }
-
-    .logo h2,
-    .logo p,
-    .menu li span,
-    .doctor-profile{
-        display:none;
-    }
-
-    .main{
-        margin-left:90px;
-    }
-
-    .menu li a{
-        justify-content:center;
-    }
-
     .header{
         flex-direction:column;
         gap:15px;
@@ -486,9 +343,11 @@ body{
 
 <body>
 
+<div class="dashboard">
+
 <!-- SIDEBAR -->
 
-<div class="sidebar">
+<aside class="sidebar">
 
     <div class="logo">
 
@@ -506,63 +365,44 @@ body{
     <ul class="menu">
 
         <li>
-            <a href="dashboard.html">
-                <i class="fa-solid fa-house"></i>
-                <span>Dashboard</span>
-            </a>
+            <i class="fa-solid fa-house"></i>
+            <span><a href="dashboard.html">Dashboard</a></span>
         </li>
 
         <li>
-            <a href="appointment.html">
-                <i class="fa-solid fa-calendar-check"></i>
-                <span>Appointments</span>
-            </a>
+            <i class="fa-solid fa-calendar-check"></i>
+            <span><a href="appointment.html">Appointments</a></span>
         </li>
 
         <li>
-            <a href="patient.html">
-                <i class="fa-solid fa-user-group"></i>
-                <span>Patients</span>
-            </a>
+            <i class="fa-solid fa-user-group"></i>
+            <span><a href="patient.html">Patients</a></span>
         </li>
 
         <li class="active">
-            <a href="messages.html">
-                <i class="fa-solid fa-message"></i>
-                <span>Messages</span>
-            </a>
+            <i class="fa-solid fa-message"></i>
+            <span><a href="messages.html">Messages</a></span>
         </li>
 
         <li>
-            <a href="reports.html">
-                <i class="fa-solid fa-file-waveform"></i>
-                <span>Reports</span>
-            </a>
+            <i class="fa-solid fa-file-waveform"></i>
+            <span><a href="reports.html">Reports</a></span>
         </li>
 
         <li>
-            <a href="settings.html">
-                <i class="fa-solid fa-gear"></i>
-                <span>Settings</span>
-            </a>
+            <i class="fa-solid fa-prescription-bottle-medical"></i>
+            <span><a href="prescriptions.html">Prescriptions</a></span>
         </li>
+
         <li>
-            <a href="prescriptions.html">
-                <i class="fa-solid fa-prescription-bottle-medical"></i>
-                <span>Prescriptions</span>
-            </a>
+            <i class="fa-solid fa-bell"></i>
+            <span><a href="notifications.html">Notifications</a></span>
         </li>
+
         <li>
-            <a href="notifications.html">
-                <i class="fa-solid fa-bell"></i>
-                <span>Notifications</span>
-            </a>
-            </li>   
-            <li>
-                <a href="settings.html">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Settings</span>
-            </li>   
+            <i class="fa-solid fa-gear"></i>
+            <span><a href="settings.html">Settings</a></span>
+        </li>
 
     </ul>
 
@@ -581,7 +421,7 @@ body{
 
     </div>
 
-</div>
+</aside>
 
 <!-- MAIN -->
 
@@ -824,6 +664,8 @@ document.getElementById("messageInput")
 renderMessages();
 
 </script>
+
+</div>
 
 </body>
 </html>
