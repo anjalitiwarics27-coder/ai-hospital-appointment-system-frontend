@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Medical Assistant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(135deg,#dff7ff,#eef2ff,#ffe9f3);
+}
+
+.container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.chatbox{
+    width:100%;
+    max-width:1300px;
+    height:95vh;
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 15px 40px rgba(0,0,0,0.12);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:320px;
+    background:linear-gradient(180deg,#0f172a,#1e293b);
+    color:white;
+    display:flex;
+    flex-direction:column;
+    padding:25px 20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.logo-circle{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+}
+
+.logo h2{
+    font-size:22px;
+    font-weight:600;
+}
+
+.new-chat{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+    margin-bottom:25px;
+}
+
+.new-chat:hover{
+    transform:translateY(-2px);
+}
+
+.search{
+    margin-bottom:25px;
+}
+
+.search input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    background:#334155;
+    color:white;
+}
+
+.chat-history{
+    flex:1;
+    overflow-y:auto;
+}
+
+.history-card{
+    padding:16px;
+    border-radius:16px;
+    margin-bottom:12px;
+    background:#1e293b;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.history-card:hover{
+    background:#334155;
+}
+
+.history-card h4{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.history-card p{
+    font-size:12px;
+    opacity:0.7;
+}
+
+/* MAIN CHAT */
+
+.main-chat{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    background:rgba(255,255,255,0.65);
+}
+
+.topbar{
+    height:90px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.ai-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.ai-avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.ai-details h2{
+    font-size:22px;
+    color:#111827;
+}
+
+.ai-details p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#dcfce7;
+    color:#166534;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#22c55e;
+}
+
+/* CHAT AREA */
+
+.chat-area{
+    flex:1;
+    padding:30px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.message-row{
+    display:flex;
+    align-items:flex-end;
+    gap:12px;
+}
+
+.bot-msg,
+.user-msg{
+    max-width:65%;
+    padding:18px 22px;
+    border-radius:22px;
+    font-size:15px;
+    line-height:1.6;
+    animation:fadeIn 0.3s ease;
+}
+
+.bot-msg{
+    background:white;
+    color:#111827;
+    border-bottom-left-radius:5px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.user-row{
+    justify-content:flex-end;
+}
+
+.user-msg{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    border-bottom-right-radius:5px;
+}
+
+.small-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:bold;
+}
+
+.bot-avatar{
+    background:linear-gradient(135deg,#06b6d4,#3b82f6);
+}
+
+.user-avatar{
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+/* INPUT */
+
+.input-area{
+    padding:25px;
+    background:white;
+    border-top:1px solid #e5e7eb;
+}
+
+.input-box{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    background:#f3f4f6;
+    padding:15px 18px;
+    border-radius:22px;
+}
+
+.input-box input{
+    flex:1;
+    border:none;
+    background:transparent;
+    outline:none;
+    font-size:15px;
+}
+
+.icon-btn{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    color:white;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.send-btn{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+}
+
+.send-btn:hover{
+    transform:scale(1.06);
+}
+
+.attach-btn{
+    background:linear-gradient(135deg,#10b981,#059669);
+}
+
+/* QUICK ACTIONS */
+
+.quick-actions{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+    flex-wrap:wrap;
+}
+
+.quick-btn{
+    padding:10px 16px;
+    border:none;
+    border-radius:30px;
+    background:#eef2ff;
+    color:#3730a3;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.quick-btn:hover{
+    background:#4f46e5;
+    color:white;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+    .sidebar{
+        display:none;
+    }
+
+    .chatbox{
+        border-radius:0;
+        height:100vh;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .chat-area{
+        padding:20px 15px;
+    }
+
+    .bot-msg,
+    .user-msg{
+        max-width:85%;
+    }
+
+    .quick-actions{
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="chatbox">
+
+        <!-- SIDEBAR -->
+
+        <div class="sidebar">
+
+            <div class="logo">
+                <div class="logo-circle">🩺</div>
+                <h2>MediAI</h2>
+            </div>
+
+            <button class="new-chat" onclick="newChat()">
+                + Start New Chat
+            </button>
+
+            <div class="search">
+                <input type="text" placeholder="Search chats...">
+            </div>
+
+            <div class="chat-history">
+
+                <div class="history-card">
+                    <h4>Appointment Booking</h4>
+                    <p>Today • 10:20 AM</p>
+                </div>
+
+                <div class="history-card">
+                    <h4>Skin Allergy Problem</h4>
+                    <p>Yesterday • 8:10 PM</p>
+                </div>
+
+                <div class="history-card">
+                    <h4>Blood Pressure Report</h4>
+                    <p>2 days ago</p>
+                </div>
+
+                <div class="history-card">
+                    <h4>Diet Consultation</h4>
+                    <p>3 days ago</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MAIN CHAT -->
+
+        <div class="main-chat">
+
+            <div class="topbar">
+
+                <div class="ai-info">
+
+                    <div class="ai-avatar">AI</div>
+
+                    <div class="ai-details">
+                        <h2>AI Medical Assistant</h2>
+                        <p>Smart healthcare support & appointments</p>
+                    </div>
+
+                </div>
+
+                <div class="status">
+                    <div class="dot"></div>
+                    Online
+                </div>
+
+            </div>
+
+            <!-- CHAT AREA -->
+
+            <div class="chat-area" id="chatArea">
+
+                <div class="message-row">
+                    <div class="small-avatar bot-avatar">AI</div>
+
+                    <div class="bot-msg">
+                        Hello 👋<br><br>
+                        I am your AI Medical Assistant.<br>
+                        How can I help you today?
+                    </div>
+                </div>
+
+                <div class="message-row user-row">
+                    <div class="user-msg">
+                        I want to book a doctor appointment.
+                    </div>
+
+                    <div class="small-avatar user-avatar">U</div>
+                </div>
+
+                <div class="message-row">
+                    <div class="small-avatar bot-avatar">AI</div>
+
+                    <div class="bot-msg">
+                        Sure ✅<br><br>
+                        Please tell me your preferred date and department.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- INPUT -->
+
+            <div class="input-area">
+
+                <div class="input-box">
+
+                    <button class="icon-btn attach-btn">📎</button>
+
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Type your message here..."
+                    />
+
+                    <button class="icon-btn send-btn" onclick="sendMessage()">
+                        ➤
+                    </button>
+
+                </div>
+
+                <div class="quick-actions">
+
+                    <button class="quick-btn" onclick="quickMessage('Book Appointment')">
+                        Book Appointment
+                    </button>
+
+                    <button class="quick-btn" onclick="quickMessage('Find Specialist')">
+                        Find Specialist
+                    </button>
+
+                    <button class="quick-btn" onclick="quickMessage('Upload Report')">
+                        Upload Report
+                    </button>
+
+                    <button class="quick-btn" onclick="quickMessage('Emergency Help')">
+                        Emergency Help
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+    let input = document.getElementById('messageInput');
+
+    let text = input.value.trim();
+
+    if(text === '') return;
+
+    let chatArea = document.getElementById('chatArea');
+
+    // USER MESSAGE
+
+    let userRow = document.createElement('div');
+    userRow.classList.add('message-row','user-row');
+
+    userRow.innerHTML = `
+
+        <div class="user-msg">
+            ${text}
+        </div>
+
+        <div class="small-avatar user-avatar">U</div>
+
+    `;
+
+    chatArea.appendChild(userRow);
+
+    input.value = '';
+
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    // BOT REPLY
+
+    setTimeout(()=>{
+
+        let botRow = document.createElement('div');
+        botRow.classList.add('message-row');
+
+        botRow.innerHTML = `
+
+            <div class="small-avatar bot-avatar">AI</div>
+
+            <div class="bot-msg">
+                Your request has been received ✅<br><br>
+                Our AI healthcare assistant is processing your query.
+            </div>
+
+        `;
+
+        chatArea.appendChild(botRow);
+
+        chatArea.scrollTop = chatArea.scrollHeight;
+
+    },900);
+
+}
+
+function quickMessage(text){
+
+    document.getElementById('messageInput').value = text;
+
+    sendMessage();
+
+}
+
+function newChat(){
+
+    alert('New AI chat started 🚀');
+
+}
+
+// ENTER KEY
+
+document.getElementById('messageInput')
+.addEventListener('keypress',function(e){
+
+    if(e.key === 'Enter'){
+        sendMessage();
+    }
+
+});
+
+</script>
+
+
+
+<!-- REPORT MODAL -->
+<div id="reportModal" class="report-modal">
+
+    <div class="report-card">
+
+        <div class="report-header">
+            <h2>Patient Medical Report</h2>
+            <button class="close-btn" onclick="closeReport()">✖</button>
+        </div>
+
+        <div class="patient-info">
+            <div>
+                <h3>Anjali Tiwari</h3>
+                <p>Patient ID: PT1024</p>
+            </div>
+
+            <div class="status-badge normal" id="caseStatus">
+                Normal Case
+            </div>
+        </div>
+
+        <div class="report-grid">
+
+            <div class="report-box">
+                <h4>Blood Pressure</h4>
+                <p>120 / 80</p>
+            </div>
+
+            <div class="report-box">
+                <h4>Heart Rate</h4>
+                <p>78 BPM</p>
+            </div>
+
+            <div class="report-box">
+                <h4>Sugar Level</h4>
+                <p>95 mg/dL</p>
+            </div>
+
+            <div class="report-box critical-box">
+                <h4>AI Prediction</h4>
+                <p>No Critical Issue Detected</p>
+            </div>
+
+        </div>
+
+        <div class="report-section">
+            <h3>Doctor Notes</h3>
+
+            <p>
+                Patient condition is stable. Regular exercise and healthy diet are recommended.
+            </p>
+        </div>
+
+        <div class="report-section">
+            <h3>Uploaded Reports</h3>
+
+            <div class="file-card">
+                <span>📄 Blood_Test_Report.pdf</span>
+                <div class="file-actions">
+                    <button onclick="downloadReport()">Download</button>
+                    <button onclick="shareReport()">Share</button>
+                </div>
+            </div>
+
+            <div class="file-card">
+                <span>📄 ECG_Report.pdf</span>
+                <div class="file-actions">
+                    <button onclick="downloadReport()">Download</button>
+                    <button onclick="shareReport()">Share</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ai-analysis">
+            <h3>AI Health Analysis</h3>
+
+            <ul>
+                <li>✅ Health condition appears normal</li>
+                <li>✅ No emergency detected</li>
+                <li>⚠ Regular monitoring recommended</li>
+                <li>💊 Continue prescribed medicines</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.report-modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    padding:20px;
+}
+
+.report-card{
+    width:100%;
+    max-width:900px;
+    max-height:95vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:28px;
+    padding:30px;
+    animation:fadeIn 0.3s ease;
+}
+
+.report-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-btn{
+    border:none;
+    background:#ef4444;
+    color:white;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.patient-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.status-badge{
+    padding:12px 18px;
+    border-radius:30px;
+    font-weight:600;
+}
+
+.normal{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.critical{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.report-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.report-box{
+    background:#f8fafc;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 5px 12px rgba(0,0,0,0.04);
+}
+
+.report-box h4{
+    margin-bottom:10px;
+    color:#64748b;
+}
+
+.report-box p{
+    font-size:18px;
+    font-weight:600;
+}
+
+.critical-box{
+    background:#eff6ff;
+}
+
+.report-section{
+    margin-bottom:25px;
+}
+
+.report-section h3,
+.ai-analysis h3{
+    margin-bottom:15px;
+}
+
+.file-card{
+    background:#f8fafc;
+    padding:15px 18px;
+    border-radius:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.file-actions{
+    display:flex;
+    gap:10px;
+}
+
+.file-actions button{
+    border:none;
+    padding:10px 15px;
+    border-radius:12px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+}
+
+.ai-analysis{
+    background:#f8fafc;
+    padding:22px;
+    border-radius:22px;
+}
+
+.ai-analysis ul{
+    padding-left:18px;
+    line-height:2;
+}
+
+.view-report-btn{
+    margin-top:15px;
+    padding:12px 18px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+</style>
+
+<script>
+
+// ADD REPORT BUTTON
+
+const quickActions = document.querySelector('.quick-actions');
+
+const reportBtn = document.createElement('button');
+reportBtn.classList.add('quick-btn');
+reportBtn.innerText = 'View Medical Report';
+reportBtn.onclick = openReport;
+quickActions.appendChild(reportBtn);
+
+function openReport(){
+    document.getElementById('reportModal').style.display='flex';
+}
+
+function closeReport(){
+    document.getElementById('reportModal').style.display='none';
+}
+
+function downloadReport(){
+    alert('Report downloaded successfully ✅');
+}
+
+function shareReport(){
+    alert('Report shared with doctor successfully 📤');
+}
+
+</script>
+</body>
+</html>

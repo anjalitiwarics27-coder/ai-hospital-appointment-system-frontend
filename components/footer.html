@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Doctor Footer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#f4f8ff;
+}
+
+/* FOOTER */
+footer{
+    background:linear-gradient(135deg,#1f5ed6,#2b7cff);
+    color:#fff;
+    padding:50px 20px 20px;
+    margin-top:60px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.footer-box h3{
+    font-size:16px;
+    margin-bottom:12px;
+    color:#ffe66d;
+}
+
+.footer-box p,
+.footer-box a{
+    font-size:13px;
+    color:#f1f1f1;
+    text-decoration:none;
+    line-height:1.7;
+}
+
+.footer-box a:hover{
+    color:#ffffff;
+    text-decoration:underline;
+}
+
+/* SOCIAL ICONS */
+.social{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.social a{
+    width:38px;
+    height:38px;
+    background:#fff;
+    color:#2b7cff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-weight:600;
+    transition:0.3s;
+    text-decoration:none;
+}
+
+.social a:hover{
+    transform:translateY(-3px);
+    background:#ffe66d;
+    color:#000;
+}
+
+/* BOTTOM TEXT */
+.bottom{
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    border-top:1px solid rgba(255,255,255,0.25);
+    padding-top:12px;
+    color:#eaeaea;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    footer{
+        text-align:center;
+    }
+
+    .social{
+        justify-content:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FOOTER START -->
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-box">
+            <h3>AI Doctor System</h3>
+            <p>
+                Smart healthcare platform using AI for appointments,
+                diagnosis, prescriptions and digital reports.
+            </p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Quick Links</h3>
+            <p><a href="#">Home</a></p>
+            <p><a href="#">Dashboard</a></p>
+            <p><a href="#">Appointments</a></p>
+            <p><a href="#">Reports</a></p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Support</h3>
+            <p>Email: support@aidoctor.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p><a href="#">Help Center</a></p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Follow Us</h3>
+            <p>Stay connected with updates</p>
+
+            <div class="social">
+                <a href="#">F</a>
+                <a href="#">T</a>
+                <a href="#">I</a>
+                <a href="#">L</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        © 2026 AI Doctor System | Designed for smart healthcare solutions
+    </div>
+
+</footer>
+<!-- FOOTER END -->
+
+</body>
+</html>

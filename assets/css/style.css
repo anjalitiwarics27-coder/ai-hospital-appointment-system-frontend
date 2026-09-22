@@ -1,0 +1,202 @@
+/* =====================================
+   AI DOCTOR SYSTEM - GLOBAL STYLE.CSS
+   Modern, Clean, Professional UI Theme
+===================================== */
+
+:root{
+    --primary:#2b7cff;
+    --primary-dark:#1f5ed6;
+    --success:#28a745;
+    --danger:#dc3545;
+    --warning:#ff9800;
+    --info:#17a2b8;
+
+    --bg:#f4f8ff;
+    --card:#ffffff;
+    --text:#2b2b2b;
+    --muted:#6b6b6b;
+
+    --radius:14px;
+    --shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+/* =====================
+   SIDEBAR
+===================== */
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:linear-gradient(180deg,var(--primary),var(--primary-dark));
+    color:#fff;
+    position:fixed;
+    padding:20px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+.sidebar a{
+    display:block;
+    padding:12px;
+    margin:8px 0;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+/* =====================
+   MAIN CONTENT
+===================== */
+.main{
+    margin-left:240px;
+    padding:25px;
+}
+
+/* HEADER */
+.header{
+    background:var(--card);
+    padding:15px 20px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h1{
+    font-size:20px;
+    color:var(--primary);
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.btn{
+    padding:10px 14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+    color:#fff;
+}
+
+.btn-primary{background:var(--primary);}
+.btn-primary:hover{background:var(--primary-dark);}
+
+.btn-success{background:var(--success);}
+.btn-danger{background:var(--danger);}
+.btn-info{background:var(--info);}
+.btn-warning{background:var(--warning);}
+
+/* =====================
+   CARDS
+===================== */
+.card{
+    background:var(--card);
+    padding:18px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:20px;
+}
+
+/* BADGE */
+.badge{
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#e7f1ff;
+    color:var(--primary);
+}
+
+/* TEXT */
+.text-muted{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* INPUT */
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    transition:0.3s;
+}
+
+input:focus, select:focus, textarea:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 6px rgba(43,124,255,0.2);
+}
+
+/* FLEX HELPERS */
+.flex{
+    display:flex;
+}
+
+.space-between{
+    justify-content:space-between;
+}
+
+.center{
+    align-items:center;
+}
+
+.gap{
+    gap:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .sidebar{
+        width:80px;
+    }
+
+    .main{
+        margin-left:80px;
+    }
+
+    .sidebar h2{
+        font-size:12px;
+    }
+
+    .sidebar a{
+        font-size:12px;
+        padding:10px;
+    }
+}

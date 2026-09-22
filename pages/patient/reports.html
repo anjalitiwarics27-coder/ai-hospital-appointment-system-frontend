@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Reports Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#e0f2fe,#f5f3ff,#ffe4e6);
+    min-height:100vh;
+    padding:25px;
+}
+
+.dashboard{
+    width:100%;
+    max-width:1450px;
+    margin:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
+    width:100%;
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(12px);
+    border-radius:24px;
+    padding:22px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo-icon{
+    width:60px;
+    height:60px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+}
+
+.logo h1{
+    font-size:28px;
+    color:#111827;
+}
+
+.logo p{
+    color:#6b7280;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.patient-avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    font-weight:600;
+}
+
+/* SUMMARY */
+
+.summary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+    margin-bottom:30px;
+}
+
+.summary-card{
+    background:white;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.06);
+    transition:0.3s;
+}
+
+.summary-card:hover{
+    transform:translateY(-5px);
+}
+
+.summary-card h3{
+    color:#64748b;
+    margin-bottom:15px;
+    font-size:16px;
+}
+
+.summary-card .value{
+    font-size:34px;
+    font-weight:700;
+    color:#111827;
+}
+
+.summary-card .status{
+    margin-top:10px;
+    font-size:14px;
+}
+
+.normal{
+    color:#16a34a;
+}
+
+.warning{
+    color:#dc2626;
+}
+
+/* MAIN GRID */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+}
+
+/* REPORT SECTION */
+
+.report-section{
+    background:white;
+    border-radius:28px;
+    padding:30px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.06);
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.section-title h2{
+    color:#111827;
+}
+
+.action-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    border:none;
+    padding:12px 18px;
+    border-radius:14px;
+    cursor:pointer;
+    color:white;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.download-btn{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.share-btn{
+    background:linear-gradient(135deg,#10b981,#059669);
+}
+
+.print-btn{
+    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+}
+
+.action-btn:hover{
+    transform:scale(1.04);
+}
+
+.report-table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:18px;
+}
+
+.report-table th{
+    background:#eff6ff;
+    color:#1e3a8a;
+    padding:18px;
+    text-align:left;
+}
+
+.report-table td{
+    padding:18px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.report-table tr:hover{
+    background:#f8fafc;
+}
+
+.case-tag{
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.case-normal{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.case-critical{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.view-btn{
+    border:none;
+    padding:10px 16px;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+/* SIDE PANEL */
+
+.side-panel{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.ai-card,
+.doctor-card,
+.activity-card{
+    background:white;
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.06);
+}
+
+.ai-card h2,
+.doctor-card h2,
+.activity-card h2{
+    margin-bottom:18px;
+}
+
+.analysis-box{
+    background:#f8fafc;
+    padding:18px;
+    border-radius:18px;
+    margin-bottom:15px;
+}
+
+.analysis-box h4{
+    margin-bottom:8px;
+    color:#0f172a;
+}
+
+.analysis-box p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-bar{
+    width:82%;
+    height:100%;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.doctor-profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.doc-avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:26px;
+    font-weight:600;
+}
+
+.contact-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.activity-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    padding-bottom:15px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.activity-item:last-child{
+    border:none;
+}
+
+.activity-item p{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal-content{
+    width:100%;
+    max-width:800px;
+    background:white;
+    border-radius:28px;
+    padding:35px;
+    max-height:90vh;
+    overflow-y:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+}
+
+.report-details{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.detail-box{
+    background:#f8fafc;
+    padding:20px;
+    border-radius:18px;
+}
+
+.detail-box h4{
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.detail-box p{
+    font-size:22px;
+    font-weight:600;
+}
+
+.ai-result{
+    background:#eff6ff;
+    padding:25px;
+    border-radius:20px;
+}
+
+.ai-result ul{
+    padding-left:20px;
+    line-height:2;
+}
+
+@media(max-width:1000px){
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:15px;
+    }
+
+    .topbar{
+        padding:20px;
+    }
+
+    .logo h1{
+        font-size:22px;
+    }
+
+    .report-section,
+    .ai-card,
+    .doctor-card,
+    .activity-card{
+        padding:20px;
+    }
+
+    .report-table{
+        display:block;
+        overflow-x:auto;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="logo">
+            <div class="logo-icon">🩺</div>
+
+            <div>
+                <h1>Patient Reports</h1>
+                <p>AI Healthcare Monitoring Dashboard</p>
+            </div>
+        </div>
+
+        <div class="profile">
+            <div>
+                <h3>Anjali Tiwari</h3>
+                <p style="color:#64748b;">Patient ID: PT1024</p>
+            </div>
+
+            <div class="patient-avatar">AT</div>
+        </div>
+
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div class="summary-grid">
+
+        <div class="summary-card">
+            <h3>Total Reports</h3>
+            <div class="value">12</div>
+            <div class="status normal">Updated Recently</div>
+        </div>
+
+        <div class="summary-card">
+            <h3>Health Score</h3>
+            <div class="value">82%</div>
+            <div class="status normal">Good Condition</div>
+        </div>
+
+        <div class="summary-card">
+            <h3>Critical Alerts</h3>
+            <div class="value">01</div>
+            <div class="status warning">Needs Monitoring</div>
+        </div>
+
+        <div class="summary-card">
+            <h3>Appointments</h3>
+            <div class="value">05</div>
+            <div class="status normal">Upcoming Checkups</div>
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main-grid">
+
+        <!-- REPORTS -->
+
+        <div class="report-section">
+
+            <div class="section-title">
+                <h2>Medical Reports</h2>
+
+                <div class="action-buttons">
+                    <button class="action-btn download-btn" onclick="downloadAll()">
+                        Download All
+                    </button>
+
+                    <button class="action-btn share-btn" onclick="shareReports()">
+                        Share Reports
+                    </button>
+
+                    <button class="action-btn print-btn" onclick="window.print()">
+                        Print
+                    </button>
+                </div>
+            </div>
+
+            <table class="report-table">
+
+                <thead>
+                    <tr>
+                        <th>Report Name</th>
+                        <th>Date</th>
+                        <th>Doctor</th>
+                        <th>Case Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Blood Test Report</td>
+                        <td>12 April 2026</td>
+                        <td>Dr. Rahul Sharma</td>
+                        <td>
+                            <span class="case-tag case-normal">
+                                Normal
+                            </span>
+                        </td>
+                        <td>
+                            <button class="view-btn" onclick="openModal()">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>ECG Report</td>
+                        <td>10 April 2026</td>
+                        <td>Dr. Neha Kapoor</td>
+                        <td>
+                            <span class="case-tag case-critical">
+                                Critical
+                            </span>
+                        </td>
+                        <td>
+                            <button class="view-btn" onclick="openModal()">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Diabetes Checkup</td>
+                        <td>07 April 2026</td>
+                        <td>Dr. Amit Verma</td>
+                        <td>
+                            <span class="case-tag case-normal">
+                                Stable
+                            </span>
+                        </td>
+                        <td>
+                            <button class="view-btn" onclick="openModal()">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Chest X-Ray</td>
+                        <td>02 April 2026</td>
+                        <td>Dr. Anjali Singh</td>
+                        <td>
+                            <span class="case-tag case-normal">
+                                Clear
+                            </span>
+                        </td>
+                        <td>
+                            <button class="view-btn" onclick="openModal()">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- SIDE PANEL -->
+
+        <div class="side-panel">
+
+            <div class="ai-card">
+                <h2>AI Health Analysis</h2>
+
+                <div class="analysis-box">
+                    <h4>Overall Health</h4>
+                    <p>
+                        Your recent reports indicate a mostly stable condition with slight cardiovascular monitoring recommended.
+                    </p>
+
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="analysis-box">
+                    <h4>AI Recommendation</h4>
+                    <p>
+                        Maintain healthy diet, exercise regularly and continue prescribed medicines.
+                    </p>
+                </div>
+            </div>
+
+            <div class="doctor-card">
+                <h2>Primary Doctor</h2>
+
+                <div class="doctor-profile">
+
+                    <div class="doc-avatar">DR</div>
+
+                    <div>
+                        <h3>Dr. Rahul Sharma</h3>
+                        <p style="color:#64748b;">
+                            Cardiologist Specialist
+                        </p>
+                    </div>
+
+                </div>
+
+                <button class="contact-btn">
+                    Contact Doctor
+                </button>
+            </div>
+
+            <div class="activity-card">
+                <h2>Recent Activity</h2>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>Report Downloaded</h4>
+                        <p>Blood Test Report</p>
+                    </div>
+
+                    <span>2h ago</span>
+                </div>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>AI Analysis Updated</h4>
+                        <p>Health monitoring complete</p>
+                    </div>
+
+                    <span>5h ago</span>
+                </div>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>Appointment Scheduled</h4>
+                        <p>Heart Specialist Consultation</p>
+                    </div>
+
+                    <span>1 day ago</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="reportModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Detailed Medical Report</h2>
+
+            <button class="close-btn" onclick="closeModal()">
+                ✖
+            </button>
+        </div>
+
+        <div class="report-details">
+
+            <div class="detail-box">
+                <h4>Blood Pressure</h4>
+                <p>120/80</p>
+            </div>
+
+            <div class="detail-box">
+                <h4>Heart Rate</h4>
+                <p>78 BPM</p>
+            </div>
+
+            <div class="detail-box">
+                <h4>Sugar Level</h4>
+                <p>95 mg/dL</p>
+            </div>
+
+            <div class="detail-box">
+                <h4>Case Status</h4>
+                <p style="color:#dc2626;">Critical</p>
+            </div>
+
+        </div>
+
+        <div class="ai-result">
+            <h3 style="margin-bottom:15px;">AI Medical Analysis</h3>
+
+            <ul>
+                <li>⚠ Mild irregular ECG patterns detected</li>
+                <li>✅ Blood sugar levels are stable</li>
+                <li>⚠ Cardiologist consultation recommended</li>
+                <li>💊 Continue current medications</li>
+                <li>🩺 Follow-up checkup after 15 days</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openModal(){
+    document.getElementById('reportModal').style.display='flex';
+}
+
+function closeModal(){
+    document.getElementById('reportModal').style.display='none';
+}
+
+function downloadAll(){
+    alert('All reports downloaded successfully ✅');
+}
+
+function shareReports(){
+    alert('Reports shared with doctor successfully 📤');
+}
+
+window.onclick=function(e){
+
+    let modal=document.getElementById('reportModal');
+
+    if(e.target==modal){
+        closeModal();
+    }
+
+}
+
+</script>
+
+</body>
+</html>

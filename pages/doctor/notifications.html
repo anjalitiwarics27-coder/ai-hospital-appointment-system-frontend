@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Notifications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f1f5f9;
+      color:#1e293b;
+      display:flex;
+      min-height:100vh;
+    }
+
+    /* Sidebar */
+
+    .sidebar{
+      width:260px;
+      background:#0f172a;
+      color:white;
+      height:100vh;
+      position:fixed;
+      padding:25px 20px;
+      overflow:auto;
+    }
+
+    .logo{
+      text-align:center;
+      font-size:28px;
+      font-weight:700;
+      color:#38bdf8;
+      margin-bottom:40px;
+    }
+
+    .menu a{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:#cbd5e1;
+      padding:14px 16px;
+      margin-bottom:12px;
+      border-radius:14px;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    .menu a:hover,
+    .menu a.active{
+      background:#38bdf8;
+      color:white;
+      transform:translateX(5px);
+    }
+
+    /* Main */
+
+    .main{
+      margin-left:260px;
+      width:calc(100% - 260px);
+      padding:30px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .topbar h1{
+      font-size:34px;
+      color:#0f172a;
+    }
+
+    .doctor-box{
+      background:white;
+      padding:10px 18px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .doctor-box img{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    /* Stats */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .card{
+      background:white;
+      border-radius:24px;
+      padding:25px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.07);
+      transition:0.3s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:rgba(56,189,248,0.12);
+      top:-50px;
+      right:-40px;
+    }
+
+    .card h3{
+      color:#64748b;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+
+    .card h2{
+      font-size:34px;
+      color:#0f172a;
+    }
+
+    /* Notification Container */
+
+    .notification-container{
+      background:white;
+      border-radius:28px;
+      padding:25px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.07);
+    }
+
+    .notification-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .notification-top h2{
+      color:#0f172a;
+      font-size:28px;
+    }
+
+    .mark-btn{
+      border:none;
+      background:#38bdf8;
+      color:white;
+      padding:12px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .mark-btn:hover{
+      background:#0284c7;
+    }
+
+    /* Notification Item */
+
+    .notification-item{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
+      padding:22px;
+      border-radius:20px;
+      background:#f8fafc;
+      margin-bottom:20px;
+      transition:0.3s;
+      border:1px solid transparent;
+    }
+
+    .notification-item:hover{
+      transform:translateY(-4px);
+      border-color:#38bdf8;
+    }
+
+    .notification-icon{
+      min-width:55px;
+      height:55px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      color:white;
+    }
+
+    .blue{
+      background:#38bdf8;
+    }
+
+    .green{
+      background:#22c55e;
+    }
+
+    .red{
+      background:#ef4444;
+    }
+
+    .orange{
+      background:#f59e0b;
+    }
+
+    .purple{
+      background:#8b5cf6;
+    }
+
+    .notification-content{
+      flex:1;
+    }
+
+    .notification-content h3{
+      font-size:18px;
+      margin-bottom:8px;
+      color:#0f172a;
+    }
+
+    .notification-content p{
+      font-size:14px;
+      color:#64748b;
+      line-height:1.6;
+      margin-bottom:10px;
+    }
+
+    .time{
+      font-size:13px;
+      color:#94a3b8;
+    }
+
+    .notification-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btn{
+      border:none;
+      padding:10px 15px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .view{
+      background:#38bdf8;
+      color:white;
+    }
+
+    .dismiss{
+      background:#e2e8f0;
+      color:#0f172a;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+    }
+
+    /* Responsive */
+
+    @media(max-width:900px){
+
+      body{
+        flex-direction:column;
+      }
+
+      .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+      }
+
+      .main{
+        width:100%;
+        margin-left:0;
+      }
+
+      .notification-item{
+        flex-direction:column;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+
+  <div class="sidebar">
+
+    <div class="logo">MediCare+</div>
+
+    <div class="menu">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="appointment.html">📅 Appointments</a>
+      <a href="patient.html">🧑‍🤝‍🧑 Patients</a>
+      <a href="messages.html">💬 Messages</a>
+      <a href="reports.html">📊 Reports</a>
+      <a href="prescriptions.html">💊 Prescriptions</a>
+      <a href="notifications.html" class="active">🔔 Notifications</a>
+     
+    </div>
+
+  </div>
+
+  <!-- Main -->
+
+  <div class="main">
+
+    <div class="topbar">
+
+      <h1>Notifications</h1>
+
+      <div class="doctor-box">
+        <img src="https://i.pravatar.cc/100?img=12">
+
+        <div>
+          <h4>Dr. Sharma</h4>
+          <p>Cardiologist</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Stats -->
+
+    <div class="stats">
+
+      <div class="card">
+        <h3>Total Notifications</h3>
+        <h2>124</h2>
+      </div>
+
+      <div class="card">
+        <h3>Unread Alerts</h3>
+        <h2>18</h2>
+      </div>
+
+      <div class="card">
+        <h3>Emergency Alerts</h3>
+        <h2>5</h2>
+      </div>
+
+      <div class="card">
+        <h3>Appointments Today</h3>
+        <h2>32</h2>
+      </div>
+
+    </div>
+
+    <!-- Notification Section -->
+
+    <div class="notification-container">
+
+      <div class="notification-top">
+
+        <h2>Recent Notifications</h2>
+
+        <button class="mark-btn">
+          Mark All as Read
+        </button>
+
+      </div>
+
+      <!-- Notification -->
+
+      <div class="notification-item">
+
+        <div class="notification-icon blue">
+          📅
+        </div>
+
+        <div class="notification-content">
+
+          <h3>New Appointment Booked</h3>
+
+          <p>
+            Rahul Verma has booked an appointment for Heart Checkup on
+            03 May 2026 at 10:30 AM.
+          </p>
+
+          <span class="time">
+            2 minutes ago
+          </span>
+
+          <div class="notification-actions">
+            <button class="btn view">View</button>
+            <button class="btn dismiss">Dismiss</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Notification -->
+
+      <div class="notification-item">
+
+        <div class="notification-icon red">
+          🚨
+        </div>
+
+        <div class="notification-content">
+
+          <h3>Emergency Patient Alert</h3>
+
+          <p>
+            Priya Singh's MRI report indicates an urgent condition.
+            Immediate attention is required.
+          </p>
+
+          <span class="time">
+            10 minutes ago
+          </span>
+
+          <div class="notification-actions">
+            <button class="btn view">View</button>
+            <button class="btn dismiss">Dismiss</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Notification -->
+
+      <div class="notification-item">
+
+        <div class="notification-icon green">
+          📄
+        </div>
+
+        <div class="notification-content">
+
+          <h3>New Report Uploaded</h3>
+
+          <p>
+            Aman Gupta's blood test report has been uploaded successfully.
+          </p>
+
+          <span class="time">
+            25 minutes ago
+          </span>
+
+          <div class="notification-actions">
+            <button class="btn view">View</button>
+            <button class="btn dismiss">Dismiss</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Notification -->
+
+      <div class="notification-item">
+
+        <div class="notification-icon orange">
+          💊
+        </div>
+
+        <div class="notification-content">
+
+          <h3>Prescription Updated</h3>
+
+          <p>
+            Prescription for Neha Sharma has been updated with new medicines.
+          </p>
+
+          <span class="time">
+            1 hour ago
+          </span>
+
+          <div class="notification-actions">
+            <button class="btn view">View</button>
+            <button class="btn dismiss">Dismiss</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Notification -->
+
+      <div class="notification-item">
+
+        <div class="notification-icon purple">
+          💬
+        </div>
+
+        <div class="notification-content">
+
+          <h3>New Patient Message</h3>
+
+          <p>
+            You received a new message from Arjun Mehta regarding medicine dosage.
+          </p>
+
+          <span class="time">
+            2 hours ago
+          </span>
+
+          <div class="notification-actions">
+            <button class="btn view">View</button>
+            <button class="btn dismiss">Dismiss</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

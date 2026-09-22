@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Appointments</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7ff;
+    padding:30px;
+}
+
+/* HEADER */
+.header{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.header h2{
+    font-size:22px;
+    font-weight:700;
+}
+
+.header p{
+    color:gray;
+    margin-top:5px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    padding:18px;
+    margin:12px 0;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+/* STATUS */
+.status{
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    color:white;
+    font-weight:600;
+}
+
+.pending{
+    background:orange;
+}
+
+.confirmed{
+    background:green;
+}
+
+/* BUTTON */
+.btn{
+    padding:6px 12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2b7cff;
+    color:white;
+    font-size:12px;
+}
+
+.btn:hover{
+    background:#155ed6;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    color:gray;
+    margin-top:50px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h2>👋 Hello, Patient</h2>
+    <p>You will be well soon ❤️</p>
+</div>
+
+<!-- LIST -->
+<div id="list"></div>
+
+<script>
+
+/* GET DATA */
+let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+let container = document.getElementById("list");
+
+/* IF EMPTY */
+if(appointments.length === 0){
+    container.innerHTML = `<div class="empty">No appointments found ❌</div>`;
+}else{
+
+    appointments.forEach(app => {
+
+        let statusClass = app.status === "Confirmed" ? "confirmed" : "pending";
+
+        container.innerHTML += `
+            <div class="card">
+
+                <p><b>👨‍⚕️ Doctor:</b> ${app.doctor}</p>
+                <p><b>👤 Name:</b> ${app.name}</p>
+                <p><b>📧 Email:</b> ${app.email}</p>
+
+                <p><b>📅 Date:</b> ${app.date}</p>
+                <p><b>⏰ Time:</b> ${app.time}</p>
+
+                <p><b>🩺 Symptoms:</b> ${app.symptoms}</p>
+
+                <p><b>Status:</b> 
+                    <span class="status ${statusClass}">
+                        ${app.status}
+                    </span>
+                </p>
+
+                <p><b>🕒 Booked At:</b> ${app.bookedAt}</p>
+
+                <p><b>🏥 Doctor Meeting Time:</b> 
+                    ${app.confirmedTime ? app.confirmedTime : "Not confirmed yet"}
+                </p>
+
+                <hr style="margin:10px 0;">
+
+                <button class="btn" onclick="alert('Contact hospital for updates')">
+                    View Details
+                </button>
+
+            </div>
+        `;
+    });
+}
+
+</script>
+
+</body>
+</html>

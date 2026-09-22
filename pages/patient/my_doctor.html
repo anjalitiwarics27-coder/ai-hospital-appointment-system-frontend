@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Doctors</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#dbeafe,#eef2ff,#ffe4e6);
+    min-height:100vh;
+    padding:25px;
+}
+
+.container{
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+}
+
+/* TOPBAR */
+
+.topbar{
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(14px);
+    border-radius:28px;
+    padding:25px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.brand-icon{
+    width:75px;
+    height:75px;
+    border-radius:22px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:34px;
+}
+
+.brand h1{
+    color:#111827;
+    font-size:30px;
+}
+
+.brand p{
+    color:#64748b;
+}
+
+.profile-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.avatar{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:24px;
+    font-weight:600;
+}
+
+/* STATS */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.07);
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:rgba(37,99,235,0.08);
+    border-radius:50%;
+    top:-40px;
+    right:-30px;
+}
+
+.stat-icon{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.blue{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+}
+
+.green{
+    background:linear-gradient(135deg,#10b981,#059669);
+}
+
+.orange{
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+}
+
+.red{
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.stat-card h2{
+    font-size:35px;
+    color:#111827;
+    margin-bottom:8px;
+}
+
+.stat-card p{
+    color:#64748b;
+}
+
+/* MAIN GRID */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:1.7fr 1fr;
+    gap:28px;
+}
+
+.card{
+    background:white;
+    border-radius:30px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.07);
+}
+
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.card-title h2{
+    color:#111827;
+}
+
+.badge{
+    background:#dbeafe;
+    color:#1d4ed8;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* DOCTOR LIST */
+
+.doctor-list{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.doctor-box{
+    border:1px solid #e5e7eb;
+    border-radius:24px;
+    padding:22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+    transition:0.3s;
+}
+
+.doctor-box:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+.doctor-info{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.doctor-avatar{
+    width:80px;
+    height:80px;
+    border-radius:22px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    font-weight:600;
+}
+
+.doctor-info h3{
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.doctor-info p{
+    color:#64748b;
+    margin-bottom:4px;
+    font-size:14px;
+}
+
+.status{
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.active{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.busy{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.book-btn{
+    padding:14px 22px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.book-btn:hover{
+    transform:scale(1.05);
+}
+
+/* APPOINTMENTS */
+
+.appointment-box{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.appointment-item{
+    background:#f8fafc;
+    border-radius:22px;
+    padding:20px;
+    border-left:5px solid #2563eb;
+}
+
+.appointment-item h3{
+    color:#111827;
+    margin-bottom:8px;
+}
+
+.appointment-item p{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+/* HEALTH BOX */
+
+.health-box{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    border-radius:28px;
+    padding:28px;
+    margin-top:28px;
+}
+
+.health-box h2{
+    margin-bottom:14px;
+}
+
+.health-box p{
+    line-height:1.7;
+    opacity:0.95;
+}
+
+.progress{
+    width:100%;
+    height:14px;
+    background:rgba(255,255,255,0.25);
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:18px;
+}
+
+.progress-bar{
+    width:78%;
+    height:100%;
+    background:white;
+}
+
+/* ACTIVITY */
+
+.activity-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    margin-bottom:18px;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.activity-item:last-child{
+    border:none;
+}
+
+.activity-item p{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:700px){
+
+    body{
+        padding:15px;
+    }
+
+    .topbar{
+        padding:22px;
+    }
+
+    .brand h1{
+        font-size:24px;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .doctor-box{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">👨‍⚕️</div>
+
+            <div>
+                <h1>My Doctors</h1>
+                <p>Manage doctors, appointments & healthcare status</p>
+            </div>
+
+        </div>
+
+        <div class="profile-box">
+
+            <div>
+                <h3>Anjali Tiwari</h3>
+                <p style="color:#64748b;">Patient ID : PT1024</p>
+            </div>
+
+            <div class="avatar">AT</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon blue">👨‍⚕️</div>
+            <h2>12</h2>
+            <p>Total Doctors Connected</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <h2>7</h2>
+            <p>Appointments Confirmed</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon orange">⏳</div>
+            <h2>3</h2>
+            <p>Pending Requests</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon red">🚑</div>
+            <h2>2</h2>
+            <p>Emergency Doctors</p>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN GRID -->
+
+    <div class="main-grid">
+
+        <!-- LEFT SIDE -->
+
+        <div>
+
+            <div class="card">
+
+                <div class="card-title">
+                    <h2>Doctor Status</h2>
+                    <div class="badge">Live Availability</div>
+                </div>
+
+                <div class="doctor-list">
+
+                    <!-- DOCTOR -->
+
+                    <div class="doctor-box">
+
+                        <div class="doctor-info">
+
+                            <div class="doctor-avatar">RK</div>
+
+                            <div>
+                                <h3>Dr. Rohan Khanna</h3>
+                                <p>Cardiologist Specialist</p>
+                                <p>Available : 10:00 AM - 6:00 PM</p>
+                            </div>
+
+                        </div>
+
+                        <div class="status active">Available</div>
+
+                        <button class="book-btn" onclick="bookDoctor('Dr. Rohan Khanna')">
+                            Book Appointment
+                        </button>
+
+                    </div>
+
+
+                    <div class="doctor-box">
+
+                        <div class="doctor-info">
+
+                            <div class="doctor-avatar">SM</div>
+
+                            <div>
+                                <h3>Dr. Sneha Mehta</h3>
+                                <p>Neurologist</p>
+                                <p>Next Slot : Tomorrow 12:30 PM</p>
+                            </div>
+
+                        </div>
+
+                        <div class="status pending">Pending</div>
+
+                        <button class="book-btn" onclick="bookDoctor('Dr. Sneha Mehta')">
+                            Request Slot
+                        </button>
+
+                    </div>
+
+
+                    <div class="doctor-box">
+
+                        <div class="doctor-info">
+
+                            <div class="doctor-avatar">AP</div>
+
+                            <div>
+                                <h3>Dr. Aryan Patel</h3>
+                                <p>Orthopedic Doctor</p>
+                                <p>Currently handling emergency patients</p>
+                            </div>
+
+                        </div>
+
+                        <div class="status busy">Busy</div>
+
+                        <button class="book-btn" onclick="bookDoctor('Dr. Aryan Patel')">
+                            Notify Me
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HEALTH TRACKER -->
+
+            <div class="health-box">
+
+                <h2>🩺 Health Monitoring Progress</h2>
+
+                <p>
+                    Your healthcare reports and AI analysis are being continuously monitored.
+                    Keep your appointments updated to maintain better treatment tracking.
+                </p>
+
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+
+                <p style="margin-top:12px;">
+                    Treatment Progress : 78%
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div>
+
+            <!-- UPCOMING APPOINTMENTS -->
+
+            <div class="card">
+
+                <div class="card-title">
+                    <h2>Upcoming Appointments</h2>
+                </div>
+
+                <div class="appointment-box">
+
+                    <div class="appointment-item">
+                        <h3>Dr. Rohan Khanna</h3>
+                        <p>📅 29 April 2026</p>
+                        <p>⏰ 11:00 AM</p>
+                        <p>📍 AI Care Hospital</p>
+                    </div>
+
+                    <div class="appointment-item">
+                        <h3>Dr. Sneha Mehta</h3>
+                        <p>📅 1 May 2026</p>
+                        <p>⏰ 2:30 PM</p>
+                        <p>📍 Neuro Health Center</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT ACTIVITY -->
+
+            <div class="card" style="margin-top:28px;">
+
+                <div class="card-title">
+                    <h2>Recent Activity</h2>
+                </div>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>Appointment Booked</h4>
+                        <p>Today, 9:20 AM</p>
+                    </div>
+                    <span>📅</span>
+                </div>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>AI Health Report Generated</h4>
+                        <p>Yesterday</p>
+                    </div>
+                    <span>🤖</span>
+                </div>
+
+                <div class="activity-item">
+                    <div>
+                        <h4>Prescription Downloaded</h4>
+                        <p>2 Days Ago</p>
+                    </div>
+                    <span>📄</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function bookDoctor(name){
+
+    alert('Appointment request sent to ' + name);
+
+}
+
+</script>
+
+</body>
+</html>

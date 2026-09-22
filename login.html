@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Doctor System - Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#141e30,#243b55);
+}
+
+.container{
+    display:flex;
+    width:900px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(25px);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 25px 70px rgba(0,0,0,0.5);
+}
+
+.left{
+    flex:1;
+    background: linear-gradient(135deg,#00c6ff,#0072ff);
+    color:#fff;
+    padding:50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.left h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.left p{
+    font-size:14px;
+    opacity:0.9;
+}
+
+.right{
+    flex:1;
+    padding:45px;
+    background:rgba(255,255,255,0.1);
+}
+
+.right h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#fff;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    background:rgba(255,255,255,0.15);
+    color:#fff;
+}
+
+input::placeholder{
+    color:#ddd;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    background: linear-gradient(135deg,#00c6ff,#0072ff);
+    border:none;
+    color:#fff;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+}
+
+.footer-text{
+    text-align:center;
+    margin-top:15px;
+    color:#ddd;
+}
+
+.footer-text a{
+    color:#00c6ff;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left">
+    <h1>AI Doctor System</h1>
+    <p>Smart healthcare with AI, easy booking & secure records.</p>
+</div>
+
+<div class="right">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+        <input type="email" id="email" placeholder="Enter Email" required />
+        <input type="password" id="password" placeholder="Enter Password" required />
+
+        <button class="btn" type="submit">Login</button>
+    </form>
+
+    <div class="footer-text">
+        Don’t have an account?
+        <a href="signup.html">Create account</a>
+    </div>
+</div>
+
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+        // 🔥 FIX 1: correct backend URL (5001)
+        const response = await fetch("http://localhost:5001/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        // 🔥 FIX 2: safe JSON parsing
+        const data = await response.json().catch(() => ({}));
+
+        console.log("STATUS:", response.status);
+        console.log("DATA:", data);
+
+        if (response.ok && data.success) {
+
+            // save data
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            alert("Login successful ✔");
+
+            // role-based redirect
+            const role = data.user.role;
+
+            if (role === "doctor") {
+                window.location.href = "Pages/doctor/dashboard.html";
+            } else {
+                window.location.href = "Pages/patient/dashboard.html";
+            }
+
+        } else {
+            alert(data.message || "Invalid credentials ❌");
+        }
+
+    } catch (error) {
+        console.log(error);
+        alert("Server not responding ❌");
+    }
+});
+</script>
+
+</body>
+</html>

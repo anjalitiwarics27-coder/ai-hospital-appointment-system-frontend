@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fa-solid fa-heart-pulse"></i>
+      </div>
+
+      <div>
+        <h2>MediCare</h2>
+        <p>Doctor Dashboard</p>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <ul class="menu">
+
+      <li class="active">
+        <i class="fa-solid fa-house"></i>   
+        <span><a href="dashboard.html" style="text-decoration: none;">Dashboard</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-calendar-check"></i>
+        <span><a href="appointment.html" style="text-decoration: none;">Appointments</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-user-group"></i>
+        <span><a href="patient.html" style="text-decoration: none;">Patients</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-message"></i>
+        <span><a href="messages.html" style="text-decoration: none;">Messages</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-file-waveform"></i>
+        <span><a href="reports.html" style="text-decoration: none;">Reports</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-prescription-bottle-medical"></i>
+        <span><a href="prescriptions.html" style="text-decoration: none;">Prescriptions</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-bell"></i>
+        <span><a href="notifications.html" style="text-decoration: none;">Notifications</a></span>
+      </li>
+
+      <li>
+        <i class="fa-solid fa-gear"></i>
+        <span><a href="settings.html" style="text-decoration: none; ">Settings</a></span>
+      </li>
+
+    </ul>
+
+    <!-- Doctor Profile -->
+    <div class="doctor-profile">
+
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="doctor">
+
+      <h3>Dr. Anjali</h3>
+
+      <p>Senior Cardiologist</p>
+
+      
+    <button onclick="window.location.href='../../home.html'" class="logout-btn">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+   </button>
+</a>
+
+
+  </a>
+
+    </div>
+
+  </aside>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Header -->
+    <header class="top-header">
+
+      <div class="header-text">
+        <h1>Welcome Back Doctor 👋</h1>
+        <p>Track patients, appointments and reports easily.</p>
+      </div>
+
+      <div class="header-right">
+
+        <!-- Search -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search patient...">
+        </div>
+
+        <!-- Icons -->
+        <div class="header-icons">
+
+          <div class="icon">
+            <i class="fa-regular fa-bell"></i>
+          </div>
+
+          <div class="icon">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="profile">
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Stats -->
+    <section class="stats-container">
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h2>1250</h2>
+          <p>Total Patients</p>
+        </div>
+
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-user-group"></i>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h2>32</h2>
+          <p><a href="appointment.html" style="text-decoration: none;">Appointments</a></p>
+        </div>
+
+        <div class="stat-icon green">
+          <i class="fa-solid fa-calendar-days"></i>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h2>08</h2>
+          <p>Pending Cases</p>
+        </div>
+
+        <div class="stat-icon orange">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h2>05</h2>
+          <p>Emergency</p>
+        </div>
+
+        <div class="stat-icon red">
+          <i class="fa-solid fa-truck-medical"></i>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- Main Grid -->
+    <section class="main-grid">
+
+      <!-- Appointments -->
+      <div class="appointments-box">
+
+        <div class="section-title">
+          <h2>Today's Appointments</h2>
+          <button>View All</button>
+        </div>
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Patient</th>
+              <th>Disease</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>09:30 AM</td>
+              <td>Rahul Sharma</td>
+              <td>Fever</td>
+              <td>
+                <span class="completed">Completed</span>
+              </td>
+              <td>
+                <button class="view-btn">View</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>11:00 AM</td>
+              <td>Nikita Singh</td>
+              <td>Cold & Cough</td>
+              <td>
+                <span class="pending">Pending</span>
+              </td>
+              <td>
+                <button class="view-btn">View</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>01:30 PM</td>
+              <td>Shreya Verma</td>
+              <td>Checkup</td>
+              <td>
+                <span class="active-status">Active</span>
+              </td>
+              <td>
+                <button class="view-btn">View</button>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+      <!-- Right Section -->
+      <div class="right-section">
+
+        <!-- Patient Report -->
+        <div class="report-box">
+
+          <div class="section-title">
+            <h2>Patient Report</h2>
+          </div>
+
+          <div class="report-content">
+
+            <div class="circle">
+              <h3>85%</h3>
+            </div>
+
+            <div class="report-details">
+
+              <p>Appointments Overview</p>
+
+              <ul>
+                <li>Completed Cases</li>
+                <li>Pending Cases</li>
+                <li>Cancelled Cases</li>
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+
+          <div class="section-title">
+            <h2>Quick Actions</h2>
+          </div>
+
+          <button>
+            <i class="fa-solid fa-user-plus"></i>
+            Add Patient
+          </button>
+
+          <button>
+            <i class="fa-solid fa-file-medical"></i>
+            Prescription
+          </button>
+
+          <button>
+            <i class="fa-solid fa-video"></i>
+            Video Call
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Bottom Section -->
+    <section class="bottom-grid">
+
+      <!-- Medicine Stock -->
+      <div class="medicine-stock">
+
+        <div class="section-title">
+          <h2>Medicine Stock</h2>
+        </div>
+
+        <div class="medicine-item">
+          <span>Paracetamol</span>
+          <span>25 Packs</span>
+        </div>
+
+        <div class="medicine-item">
+          <span>Vitamin C</span>
+          <span>10 Packs</span>
+        </div>
+
+        <div class="medicine-item">
+          <span>Antibiotics</span>
+          <span>12 Packs</span>
+        </div>
+
+      </div>
+
+
+      <!-- Messages -->
+      <div class="messages-box">
+
+        <div class="section-title">
+          <h2>Recent Messages</h2>
+        </div>
+
+        <div class="message">
+
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+          <div>
+            <h4>Rahul Sharma</h4>
+            <p>Doctor, I have fever from yesterday.</p>
+          </div>
+
+        </div>
+
+        <div class="message">
+
+          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+          <div>
+            <h4>Nikita Singh</h4>
+            <p>Please check my blood report.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
