@@ -6,7 +6,7 @@
    BASE CONFIG (from config.js)
    Change URL only in assets/js/config.js
 ========================= */
-const API_BASE = window.API_BASE_URL || "http://localhost:5001/api";
+const API_BASE = window.API_BASE_URL || "https://ai-hospital-appointment-system-backend-production.up.railway.app/api";
 
 /* =========================
    TOKEN HANDLER

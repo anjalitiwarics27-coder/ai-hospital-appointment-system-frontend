@@ -4,7 +4,7 @@
    For live backend (Render/Railway/etc):
    e.g. https://your-backend.onrender.com/api
 ===================================== */
-const API_BASE_URL = "http://localhost:5001/api";
+const API_BASE_URL = "https://ai-hospital-appointment-system-backend-production.up.railway.app/api";
 
 // Make available globally (for normal <script> pages)
 window.API_BASE_URL = API_BASE_URL;

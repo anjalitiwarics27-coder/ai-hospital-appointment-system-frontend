@@ -1,5 +1,5 @@
 /* API_ROOT comes from assets/js/config.js (base without /api) */
-const API_BASE = window.API_ROOT || window.API_BASE_URL || "http://localhost:5001";
+const API_BASE = window.API_ROOT || window.API_BASE_URL || "https://ai-hospital-appointment-system-backend-production.up.railway.app";
 
 /* =========================
    AUTH CHECK

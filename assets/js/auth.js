@@ -1,5 +1,5 @@
 /* API base from assets/js/config.js (load config.js before this file) */
-const API_BASE = window.API_BASE_URL || "http://localhost:5001/api";
+const API_BASE = window.API_BASE_URL || "https://ai-hospital-appointment-system-backend-production.up.railway.app/api";
 
 /* =========================
    VALIDATION HELPERS
