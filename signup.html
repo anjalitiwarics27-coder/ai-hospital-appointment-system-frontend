@@ -133,12 +133,13 @@ input:focus, select:focus{
 <div class="msg" id="msg"></div>
 
 <div class="footer">
-Already have an account? <a href="login.html">Login</a>
+Already have an account? <a href="index.html">Login</a>
 </div>
 
 </div>
 </div>
 
+<script src="assets/js/config.js"></script>
 <script>
 const form = document.getElementById("signupForm");
 const msg = document.getElementById("msg");
@@ -176,7 +177,7 @@ form.addEventListener("submit", async (e) => {
     btn.innerText = "Creating...";
 
     try{
-        const res = await fetch("http://localhost:5001/api/auth/signup", {
+        const res = await fetch(`${API_BASE_URL}/auth/signup`, {
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -195,7 +196,7 @@ form.addEventListener("submit", async (e) => {
             msg.style.color = "green";
 
             setTimeout(() => {
-                window.location.href = "login.html";
+                window.location.href = "index.html";
             }, 1500);
         } else {
             msg.innerHTML = data.message || "Signup failed";

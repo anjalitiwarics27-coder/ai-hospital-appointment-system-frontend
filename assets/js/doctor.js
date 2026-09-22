@@ -1,4 +1,5 @@
-const API_BASE = "http://127.0.0.1:5001";
+/* API_ROOT comes from assets/js/config.js (base without /api) */
+const API_BASE = window.API_ROOT || window.API_BASE_URL || "http://localhost:5001";
 
 /* =========================
    AUTH CHECK
@@ -8,13 +9,13 @@ function checkDoctorAuth() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!token || !user) {
-        window.location.href = "../login.html";
+        window.location.href = "../../index.html";
         return;
     }
 
     if (user.role !== "doctor") {
         alert("Access denied ❌ Doctors only");
-        window.location.href = "../login.html";
+        window.location.href = "../../index.html";
     }
 }
 

@@ -1,4 +1,5 @@
-import API_BASE from "./api.js";
+/* API base from assets/js/config.js (load config.js before this file) */
+const API_BASE = window.API_BASE_URL || "http://localhost:5001/api";
 
 /* =========================
    VALIDATION HELPERS
@@ -95,7 +96,9 @@ async function handleSignup(event) {
         showAuthMessage("Signup successful ✔", "success");
 
         setTimeout(() => {
-            window.location.href = "login.html";
+            window.location.href = window.location.pathname.includes("/pages/")
+                ? "../../index.html"
+                : "index.html";
         }, 1200);
 
     } else {
@@ -129,10 +132,15 @@ async function handleLogin(event) {
         localStorage.setItem("user", JSON.stringify(result.user));
 
         setTimeout(() => {
+            const inPages = window.location.pathname.includes("/pages/");
             if (result.user.role === "doctor") {
-                window.location.href = "doctor/doctor_dashboard.html";
+                window.location.href = inPages
+                    ? "dashboard.html"
+                    : "pages/doctor/dashboard.html";
             } else {
-                window.location.href = "patient/patient_dashboard.html";
+                window.location.href = inPages
+                    ? "dashboard.html"
+                    : "pages/patient/dashboard.html";
             }
         }, 1200);
 
@@ -151,7 +159,9 @@ function logout() {
     showAuthMessage("Logged out ✔", "success");
 
     setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = window.location.pathname.includes("/pages/")
+            ? "../../index.html"
+            : "index.html";
     }, 1000);
 }
 
@@ -162,7 +172,9 @@ function checkAuth() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        window.location.href = "../login.html";
+        window.location.href = window.location.pathname.includes("/pages/")
+            ? "../../index.html"
+            : "index.html";
     }
 }
 
@@ -174,6 +186,6 @@ window.addEventListener("load", () => {
 });
 
 /* =========================
-   EXPORT (optional if using modules)
+   GLOBAL EXPORT (works with normal <script>, no modules needed)
 ========================= */
-export { handleSignup, handleLogin, logout, checkAuth };
+window.Auth = { handleSignup, handleLogin, logout, checkAuth };

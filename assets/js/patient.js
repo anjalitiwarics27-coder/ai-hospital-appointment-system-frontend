@@ -21,13 +21,13 @@ function checkPatientAuth() {
     const session = getSession();
 
     if (!session) {
-        window.location.href = "../login.html";
+        window.location.href = "../../index.html";
         return;
     }
 
     if (session.role !== "patient") {
         alert("Access denied ❌ Only patients allowed");
-        window.location.href = "../login.html";
+        window.location.href = "../../index.html";
     }
 }
 

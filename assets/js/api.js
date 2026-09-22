@@ -3,9 +3,10 @@
 ===================================== */
 
 /* =========================
-   BASE CONFIG
+   BASE CONFIG (from config.js)
+   Change URL only in assets/js/config.js
 ========================= */
-const API_BASE = "http://localhost:5001/api";
+const API_BASE = window.API_BASE_URL || "http://localhost:5001/api";
 
 /* =========================
    TOKEN HANDLER
@@ -163,7 +164,10 @@ const healthCheck = () =>
 ========================= */
 function logout() {
     removeToken();
-    window.location.href = "login.html";
+    // Works from root and from pages/*/ subfolders
+    window.location.href = window.location.pathname.includes("/pages/")
+        ? "../../index.html"
+        : "index.html";
 }
 
 /* =========================

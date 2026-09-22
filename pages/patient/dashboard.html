@@ -366,6 +366,7 @@ body{
     <p> Heart Rate: 72 bpm</p>
     <p>Blood Sugar: 90 mg/dL</p>
     <button class="btn" onclick="viewHealth()">View Details</button>
+<script src="../../assets/js/config.js"></script>
 <script>
 /* view health summary */
 function viewHealth(){
@@ -464,8 +465,8 @@ function startEmergency(){
                 // SAVE backup
                 localStorage.setItem("last_emergency", JSON.stringify(locationData));
 
-                // 🔥 BACKEND CALL
-                fetch("http://localhost:5000/api/emergency/alert", {
+                // 🔥 BACKEND CALL (URL from config.js)
+                fetch(`${API_BASE_URL}/emergency/alert`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
